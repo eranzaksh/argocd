@@ -13,7 +13,7 @@ jobs:
     
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
   
       - name: Install yq
         run: sudo wget https://github.com/mikefarah/yq/releases/download/v4.27.3/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
