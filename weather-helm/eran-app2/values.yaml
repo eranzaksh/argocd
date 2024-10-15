@@ -1,7 +1,7 @@
 name: "web-app"
 image:
   repository: eranzaksh/infinity
-  tag: "db93166"
+  tag: "be08979"
 service:
   type: ClusterIP
   port: 5000
