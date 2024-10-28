@@ -1,0 +1,45 @@
+name: Deploy Workflow
+
+on:
+  repository_dispatch:
+    types: [trigger_lambda]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+  
+      - name: Set up Kubernetes
+        uses: azure/setup-kubectl@v1
+        with:
+          version: 'latest'
+
+      - name: Configure kubectl
+        run: |
+          aws eks update-kubeconfig --name tf-eks --region eu-north-1
+
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3.sh | bash
+
+      - name: Login to Argo CD
+        run: |
+          argocd login YOUR_ARGOCD_SERVER --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
+  
+      - name: Create Argo CD Application from Helm
+        run: |
+          echo "Creating Argo CD Application from Helm chart..."
+          argocd app create demo-app \
+            --repo https://github.com/eranzaksh/helm.git \
+            --path weather-helm/eran-app2 \
+            --dest-server https://kubernetes.default.svc \
+            --dest-namespace ${{ github.event.client_payload.namespace }} \
+            --revision HEAD \
+            --helm-set image.tag=${{ github.event.client_payload.docker_image_tag }} \
+            --sync-policy automated \
+            --sync-option CreateNamespace=true
+
+          echo "Argo CD Application created successfully."
