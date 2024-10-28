@@ -17,5 +17,6 @@ persistent:
 ingress:
   spec:
     host: eran.humi.com
+  path: /home
 secret:
   key: "default"
