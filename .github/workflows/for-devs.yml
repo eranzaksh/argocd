@@ -49,7 +49,7 @@ jobs:
         run: |
           echo "Creating Argo CD Application from Helm chart..."
           argocd app create demo-app \
-            --repo https://github.com/eranzaksh/helm.git \
+            --repo https://github.com/eranzaksh/argocd.git \
             --path weather-helm/eran-app2 \
             --dest-server https://kubernetes.default.svc \
             --dest-namespace ${{ github.event.client_payload.namespace }} \
