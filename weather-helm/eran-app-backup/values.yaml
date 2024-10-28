@@ -1,0 +1,21 @@
+name: "web-app"
+image:
+  repository: eranzaksh/infinity
+  tag: "db93166"
+service:
+  type: ClusterIP
+  port: 5000
+spec:
+  replicaCount: 2
+volumes:
+  name: caching
+  mountPath: /home/cache
+persistent:
+  name: caching-pv
+  storage: 128Mi
+  storageClassName: manual
+ingress:
+  spec:
+    host: eran.humi.com
+secret:
+  key: "default"

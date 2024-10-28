@@ -14,6 +14,10 @@ spec:
       annotations:
         checksum/api-secret: {{ .Values.secret.key | sha256sum }}
     spec:
+      volumes:
+        - name: {{ .Values.volumes.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistent.name }}
       containers:
         - name: {{ .Values.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -25,4 +29,7 @@ spec:
                 key: api-key
           ports:
             - containerPort: {{ .Values.service.port }}
+          volumeMounts:
+            - name: {{ .Values.volumes.name }}
+              mountPath: {{ .Values.volumes.mountPath }}
  
