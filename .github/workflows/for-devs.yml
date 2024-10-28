@@ -55,6 +55,7 @@ jobs:
             --dest-namespace ${{ github.event.client_payload.namespace }} \
             --revision HEAD \
             --helm-set image.tag=${{ github.event.client_payload.docker_image_tag }} \
+            --helm-set ingress.path="/${{ github.event.client_payload.namespace }}" \
             --sync-policy automated \
             --sync-option CreateNamespace=true
 
