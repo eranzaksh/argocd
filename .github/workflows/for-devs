@@ -34,7 +34,7 @@ jobs:
 
       - name: Login to Argo CD
         run: |
-          argocd login YOUR_ARGOCD_SERVER --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
+          argocd login ${{ secrets.ARGOCD_SERVER }} --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
   
       - name: Create Argo CD Application from Helm
         run: |
