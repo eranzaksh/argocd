@@ -35,6 +35,18 @@ jobs:
           sudo mv linux-amd64/helm /usr/local/bin/helm
           helm version
 
+      - name: Retrieve NGINX Ingress Load Balancer Hostname
+        id: lb-hostname
+        run: |
+          LB_HOSTNAME=$(kubectl get svc -n ingress-nginx ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+          echo "LB_HOSTNAME=$LB_HOSTNAME" >> $GITHUB_ENV
+
+      - name: Send Hostname to Lambda via API Gateway
+        run: |
+          curl -X POST <your-api-gateway-url> \
+          -H "Content-Type: application/json" \
+          -d '{"hostname": "'${{ env.LB_HOSTNAME }}'"}'
+
       - name: Install Argo CD CLI
         run: |
           curl -sSL https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 -o argocd
