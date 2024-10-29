@@ -2,7 +2,7 @@ name: Deploy Workflow
 
 on:
   repository_dispatch:
-    types: [trigger_lambda]
+    # types: [trigger_lambda]
 
 jobs:
   build:
