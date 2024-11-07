@@ -24,14 +24,14 @@ pipeline {
         stage("deploy to eks") {
             steps {
                 script {
-                    sh "echo ${params.GIT_COMMIT}"
-                    echo "API_KEY: ${params.GIT_COMMIT}"
                     withAWS(credentials:'aws-access-and-secret') {
                         sh """
                         aws eks update-kubeconfig --region eu-north-1 --name tf-eks
+                        kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
+
                         helm upgrade --install ${helmName} *.tgz   \
                             --set secret.key=${API_KEY} \
-                            --set image.tag=${params.GIT_COMMIT}
+                            --set image.tag=${params.BUILD}-${params.GIT_COMMIT}
                         """
                     }
                     
