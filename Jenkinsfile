@@ -24,16 +24,14 @@ pipeline {
         stage("deploy to eks") {
             steps {
                 script {
-                    def branchName = env.GIT_BRANCH
-                    sh "echo ${API_KEY}"
-                    echo "No param API_KEY: ${API_KEY}"
-                    echo "API_KEY: ${params.API_KEY}"
+                    sh "echo ${params.GIT_COMMIT}"
+                    echo "API_KEY: ${params.GIT_COMMIT}"
                     withAWS(credentials:'aws-access-and-secret') {
                         sh """
                         aws eks update-kubeconfig --region eu-north-1 --name tf-eks
                         helm upgrade --install ${helmName} *.tgz   \
                             --set secret.key=${API_KEY} \
-                            --set image.tag=${GIT_COMMIT}
+                            --set image.tag=${params.GIT_COMMIT}
                         """
                     }
                     
