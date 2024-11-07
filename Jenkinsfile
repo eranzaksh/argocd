@@ -27,7 +27,6 @@ pipeline {
                     withAWS(credentials:'aws-access-and-secret') {
                         sh """
                         aws eks update-kubeconfig --region eu-north-1 --name tf-eks
-                        kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.3.0/deploy/static/provider/cloud/deploy.yaml
 
                         helm upgrade --install ${helmName} *.tgz   \
                             --set secret.key=${API_KEY} \
