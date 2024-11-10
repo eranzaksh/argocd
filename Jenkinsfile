@@ -46,18 +46,23 @@ pipeline {
 stage('git push') {
     steps {
         withCredentials([
-            sshUserPrivateKey(credentialsId: 'github-for-jobs', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
+            sshUserPrivateKey(credentialsId: 'github-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
         ]) {
-            sh "git config --global --add safe.directory '*'"
             sh '''
+                 # Configure Git user
                  git config user.name "Jenkins Bot"
                  git config user.email "jenkins@example.com"
+
+                 # Ensure the remote URL is set to SSH
+                 git remote set-url origin git@github.com:eranzaksh/argocd.git
+
+                 # Add and commit changes
                  git add .
                  git commit -m "update values.yaml"
 
                  # Push changes using SSH key
                  GIT_SSH_COMMAND="ssh -i $SSH_KEY" git push origin HEAD:main
-                '''
+            '''
         }
     }
 }
