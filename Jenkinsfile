@@ -50,6 +50,8 @@ stage('git push') {
         ]) {
             sh "git config --global --add safe.directory '*'"
             sh '''
+                 git config user.name "Jenkins Bot"
+                 git config user.email "jenkins@example.com"
                  git add .
                  git commit -m "update values.yaml"
 
