@@ -43,13 +43,19 @@ pipeline {
                 }
             }
         }
-        stage("Push new configuration to repo") {
-            steps {
-                script {
-                    sh 'git commit -am "Updated image tag"'
-                }
-            }
+stage('git push') {
+    steps {
+        withCredentials([
+            gitUsernamePassword(credentialsId: 'github-for-jobs', gitToolName: 'Default')
+        ]) {
+            sh '''
+                 git add .
+                 git commit -m "update values.yaml"
+                 git push
+            '''
         }
+    }
+}
     
  
     }     
