@@ -56,8 +56,8 @@ stage('git push') {
                  git commit -m "update values.yaml"
 
                  # Push changes using SSH key
-                 GIT_SSH_COMMAND="ssh -i $SSH_KEY" git push
-            '''
+                 GIT_SSH_COMMAND="ssh -i $SSH_KEY" git push origin HEAD:main
+                '''
         }
     }
 }
