@@ -46,7 +46,7 @@ pipeline {
 stage('git push') {
     steps {
         withCredentials([
-            sshUserPrivateKey(credentialsId: 'github-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
+            sshUserPrivateKey(credentialsId: 'github-for-jobs', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
         ]) {
             sh '''
                  git add .
