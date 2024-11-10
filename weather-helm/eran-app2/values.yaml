@@ -6,7 +6,7 @@ service:
   type: ClusterIP
   port: 5001
 spec:
-  replicaCount: 2
+  replicaCount: 1
 volumes:
   name: caching
   mountPath: /home/cache
