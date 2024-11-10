@@ -25,7 +25,9 @@ pipeline {
             
             }
         }
-        
+                        // helm upgrade --install ${helmName} ./weather-helm/*.tgz   \
+                        //     --set secret.key=${API_KEY} \
+                        //     --set image.tag=${params.BUILD}-${params.GIT_COMMIT}
 
         // Here GIT_COMMIT comes from the first job and is a trigger for this job
         stage("deploy to eks") {
@@ -34,10 +36,13 @@ pipeline {
                     withAWS(credentials:'aws-access-and-secret') {
                         sh """
                         aws eks update-kubeconfig --region eu-north-1 --name tf-eks
+                        kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+                        argocd login localhost:8080 --username admin --password KrUEECzv0pDj0SRv --insecure
+                        argocd app set weather \
+                            --set image.tag=${params.BUILD}-${params.GIT_COMMIT} \
+                            --namespace test
 
-                        helm upgrade --install ${helmName} ./weather-helm/*.tgz   \
-                            --set secret.key=${API_KEY} \
-                            --set image.tag=${params.BUILD}-${params.GIT_COMMIT}
+                        pkill -f "kubectl port-forward svc/argocd-server"
                         """
                     }
                     
