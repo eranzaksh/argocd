@@ -46,12 +46,14 @@ pipeline {
 stage('git push') {
     steps {
         withCredentials([
-            gitUsernamePassword(credentialsId: 'github-for-jobs', gitToolName: 'Default')
+            sshUserPrivateKey(credentialsId: 'github-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
         ]) {
             sh '''
                  git add .
                  git commit -m "update values.yaml"
-                 git push
+
+                 # Push changes using SSH key
+                 GIT_SSH_COMMAND="ssh -i $SSH_KEY" git push
             '''
         }
     }
