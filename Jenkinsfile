@@ -43,6 +43,13 @@ pipeline {
                 }
             }
         }
+        stage("Push new configuration to repo") {
+            steps {
+                script {
+                    sh 'git commit -am "Updated image tag"'
+                }
+            }
+        }
     
  
     }     
