@@ -12,3 +12,4 @@
 !*.tf
 !Jenkinsfile
 !*.html
+!*.tgz
