@@ -12,7 +12,7 @@ volumes:
   mountPath: /home/cache
 persistent:
   name: caching-pv
-  storage: 128Mi
+  storage: 1Gi
   storageClassName: ebs-gp3
 ingress:
   spec:
