@@ -9,7 +9,14 @@ pipeline {
     }
 
 
-    agent {label 'eee'}
+    agent {
+        docker {
+            label 'eee'
+            image "eranzaksh/jenkins-agent:python"
+            args '-u 0:0 -v /var/run/docker.sock:/var/run/docker.sock'
+            alwaysPull true
+        }
+    }
 
     stages {
         stage("Clone Git Repository") {
