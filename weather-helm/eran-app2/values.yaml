@@ -13,7 +13,7 @@ volumes:
 persistent:
   name: caching-pv
   storage: 128Mi
-  storageClassName: manual
+  storageClassName: ebs-gp3
 ingress:
   spec:
     host: 
