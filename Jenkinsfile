@@ -35,7 +35,7 @@ pipeline {
                         sh """
                         aws eks update-kubeconfig --region eu-north-1 --name tf-eks
 
-                        helm upgrade --install ${helmName} ./*.tgz   \
+                        helm upgrade --install ${helmName} ./weather-helm/*.tgz   \
                             --set secret.key=${API_KEY} \
                             --set image.tag=${params.BUILD}-${params.GIT_COMMIT}
                         """
