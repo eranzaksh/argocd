@@ -36,7 +36,9 @@ pipeline {
                     withAWS(credentials:'aws-access-and-secret') {
                         sh """
                         aws eks update-kubeconfig --region eu-north-1 --name tf-eks
-                        kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+                        kubectl port-forward svc/argocd-server -n argocd 8080:443 
+                        """
+                        sh """
                         argocd login localhost:8080 --username admin --password KrUEECzv0pDj0SRv --insecure
                         argocd app set weather \
                             --set image.tag=${params.BUILD}-${params.GIT_COMMIT} \
