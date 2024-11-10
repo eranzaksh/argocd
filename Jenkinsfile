@@ -48,6 +48,7 @@ stage('git push') {
         withCredentials([
             sshUserPrivateKey(credentialsId: 'github-for-jobs', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
         ]) {
+            sh "git config --global --add safe.directory '*'"
             sh '''
                  git add .
                  git commit -m "update values.yaml"
