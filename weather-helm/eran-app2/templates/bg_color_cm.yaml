@@ -4,4 +4,4 @@ metadata:
   name: bg_color
   namespace: weatherapp 
 data: 
-  BG_COLOR: "#FFA07A"
+  BG_COLOR: {{ .Values.configmap.bgColor }}

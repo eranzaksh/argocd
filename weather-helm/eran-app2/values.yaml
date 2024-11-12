@@ -19,3 +19,5 @@ ingress:
     host:
 secret:
   key: "default"
+configmap:
+  bgColor: "#FFA07A"
