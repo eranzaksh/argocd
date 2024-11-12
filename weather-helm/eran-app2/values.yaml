@@ -9,7 +9,7 @@ spec:
   replicaCount: 1
 volumes:
   name: caching
-  mountPath: /home/cache
+  mountPath: cache
 persistent:
   name: caching-pv
   storage: 1Gi
