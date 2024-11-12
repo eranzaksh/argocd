@@ -30,8 +30,8 @@ spec:
             - name: BG_COLOR
               valueFrom:
                 configMapKeyRef:
-                  name: bg_color
-                  key: BG_COLOR
+                  name: bg-color
+                  key: BG-COLOR
           ports:
             - containerPort: {{ .Values.service.port }}
           volumeMounts:
