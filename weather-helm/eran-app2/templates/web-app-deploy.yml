@@ -27,7 +27,7 @@ spec:
                 secretKeyRef:
                   name: api-key
                   key: api-key
-            - name: BG_COLOR
+            - name: BG-COLOR
               valueFrom:
                 configMapKeyRef:
                   name: bg-color
