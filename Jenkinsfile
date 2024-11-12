@@ -30,23 +30,17 @@ pipeline {
                         //     --set image.tag=${params.BUILD}-${params.GIT_COMMIT}
 
         // Here GIT_COMMIT comes from the first job and is a trigger for this job
-        stage("deploy to eks") {
+        stage("update configuration files") {
             steps {
                 script {
-                    withAWS(credentials:'aws-access-and-secret') {
-                        sh """
-                        aws eks update-kubeconfig --region eu-north-1 --name tf-eks
-                        yq -i '.image.tag = "'${params.BUILD}-${params.GIT_COMMIT}'"' weather-helm/eran-app2/values.yaml
-                        """
-                    }
-                    
+                    sh "yq -i '.image.tag = "'${params.BUILD}-${params.GIT_COMMIT}'"' weather-helm/eran-app2/values.yaml"
                 }
             }
         }
 stage('git push') {
     steps {
         withCredentials([
-            sshUserPrivateKey(credentialsId: 'github-ssh-key', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
+            sshUserPrivateKey(credentialsId: 'github-for-jobs', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
         ]) {
             sh '''
                  # Configure Git user
