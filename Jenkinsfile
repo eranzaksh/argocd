@@ -39,29 +39,35 @@ pipeline {
                 }
             }
         }
-stage('git push') {
-    steps {
-        withCredentials([
-            sshUserPrivateKey(credentialsId: 'github-for-jobs', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
-        ]) {
-            sh '''
-                 # Configure Git user
-                 git config user.name "Jenkins Bot"
-                 git config user.email "jenkins@example.com"
+    stage('git push') {
+        steps {
+            withCredentials([
+                sshUserPrivateKey(credentialsId: 'github-for-jobs', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
+            ]) {
+                script {
+                    // Check current directory and ensure it's a git repository
+                    sh 'pwd'  // Output current working directory
+                    sh 'git status'  // This should confirm it's a git repo
 
-                 # Ensure the remote URL is set to SSH
-                 git remote set-url origin git@github.com:eranzaksh/argocd.git
+                    // Configure Git user
+                    sh '''
+                    git config user.name "Jenkins Bot"
+                    git config user.email "jenkins@example.com"
 
-                 # Add and commit changes
-                 git add .
-                 git commit -m "update values.yaml"
+                    # Ensure the remote URL is set to SSH
+                    git remote set-url origin git@github.com:eranzaksh/argocd.git
 
-                 # Push changes using SSH key
-                 GIT_SSH_COMMAND="ssh -i $SSH_KEY" git push origin HEAD:main
-            '''
+                    # Add and commit changes
+                    git add .
+                    git commit -m "update values.yaml" || echo "No changes to commit"
+
+                    # Push changes using SSH key
+                    GIT_SSH_COMMAND="ssh -i $SSH_KEY" git push origin HEAD:main
+                    '''
+                }
+            }
         }
     }
-}
     
  
     }     
