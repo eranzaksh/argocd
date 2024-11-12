@@ -33,7 +33,9 @@ pipeline {
         stage("update configuration files") {
             steps {
                 script {
-                    sh "yq -i '.image.tag = "'${params.BUILD}-${params.GIT_COMMIT}'"' weather-helm/eran-app2/values.yaml"
+                    sh """
+                    yq -i '.image.tag = "'${params.BUILD}-${params.GIT_COMMIT}'"' weather-helm/eran-app2/values.yaml
+                    """
                 }
             }
         }
