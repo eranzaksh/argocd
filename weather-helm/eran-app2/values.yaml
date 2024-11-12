@@ -1,7 +1,7 @@
 name: "web-app"
 image:
   repository: eranzaksh/infinity
-  tag: "latest"
+  tag: "50-f6da8b2ff2c3527cc5da1935c1f99bbd456a7ad4"
 service:
   type: ClusterIP
   port: 5001
@@ -16,6 +16,6 @@ persistent:
   storageClassName: ebs-gp3
 ingress:
   spec:
-    host: 
+    host:
 secret:
   key: "default"
