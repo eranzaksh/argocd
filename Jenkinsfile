@@ -45,10 +45,8 @@ pipeline {
                 sshUserPrivateKey(credentialsId: 'github-for-jobs', keyFileVariable: 'SSH_KEY', usernameVariable: 'GIT_USER')
             ]) {
                 script {
-                    // Check current directory and ensure it's a git repository
+                    // Ensure the repository directory is safe
                     sh 'git config --global --add safe.directory /home/ec2-user/workspace/project-cd'
-                    sh 'pwd'  // Output current working directory
-                    sh 'git status'  // This should confirm it's a git repo
 
                     // Configure Git user
                     sh '''
@@ -57,6 +55,10 @@ pipeline {
 
                     # Ensure the remote URL is set to SSH
                     git remote set-url origin git@github.com:eranzaksh/argocd.git
+
+                    # Add GitHub's SSH key to known_hosts to prevent "Host key verification failed"
+                    mkdir -p ~/.ssh
+                    ssh-keyscan github.com >> ~/.ssh/known_hosts
 
                     # Add and commit changes
                     git add .
