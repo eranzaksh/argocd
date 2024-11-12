@@ -46,6 +46,7 @@ pipeline {
             ]) {
                 script {
                     // Check current directory and ensure it's a git repository
+                    sh 'git config --global --add safe.directory /home/ec2-user/workspace/project-cd'
                     sh 'pwd'  // Output current working directory
                     sh 'git status'  // This should confirm it's a git repo
 
