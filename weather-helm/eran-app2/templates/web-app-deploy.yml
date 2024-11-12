@@ -27,6 +27,11 @@ spec:
               secretKeyRef:
                 name: api-key
                 key: api-key
+            name: BG_COLOR
+            valueFrom:
+              configMapKeyRef:
+                name: bg_color
+                key: BG_COLOR
           ports:
             - containerPort: {{ .Values.service.port }}
           volumeMounts:
