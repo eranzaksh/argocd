@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: bg-color
 data: 
-  BG-COLOR: {{ .Values.configmap.bgColor }}
+  BG-COLOR: "{{ .Values.configmap.bgColor }}"
