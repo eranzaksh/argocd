@@ -1,7 +1,7 @@
 name: "web-app"
 image:
   repository: eranzaksh/infinity
-  tag: "50-f6da8b2ff2c3527cc5da1935c1f99bbd456a7ad4"
+  tag: "51-49c34c757478751e623a3377462eef4f4d62dc9f"
 service:
   type: ClusterIP
   port: 5001
