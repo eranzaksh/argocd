@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: bg_color
 data: 
-  BG_COLOR: #FFA07A
+  BG_COLOR: "#FFA07A"
