@@ -5,7 +5,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host:
+  - host: appweather.duckdns.org
     http:
       paths:
       - path: /
@@ -14,5 +14,14 @@ spec:
           service:
             name: web-app
             port:
-              number: 80 
-
+              number: 80
+  # - host: host2.example.com
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: web-app
+  #           port:
+  #             number: 80
