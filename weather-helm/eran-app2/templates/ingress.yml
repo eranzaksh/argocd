@@ -25,13 +25,4 @@ spec:
             name: solitair-deploy
             port:
               number: 80
-  - host: erangrafana.duckdns.org
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: grafana.grafana
-            port:
-              number: 80
+              
