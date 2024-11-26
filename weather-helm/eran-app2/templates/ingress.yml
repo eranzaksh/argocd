@@ -15,13 +15,13 @@ spec:
             name: web-app
             port:
               number: 80
-  # - host: host2.example.com
-  #   http:
-  #     paths:
-  #     - path: /
-  #       pathType: Prefix
-  #       backend:
-  #         service:
-  #           name: web-app
-  #           port:
-  #             number: 80
+  - host: ingsolitaire.duckdns.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: solitair-deploy
+            port:
+              number: 80
