@@ -1,11 +1,8 @@
 pipeline {
     
     environment {
-        registry = "eranzaksh/infinity" 
-        registryCredential = 'docker-hub' 
         GIT_COMMIT = ''
         API_KEY = credentials('visual-crossing-api')
-        helmName = "eran-app2"
     }
 
 
@@ -25,11 +22,8 @@ pipeline {
             
             }
         }
-                        // helm upgrade --install ${helmName} ./weather-helm/*.tgz   \
-                        //     --set secret.key=${API_KEY} \
-                        //     --set image.tag=${params.BUILD}-${params.GIT_COMMIT}
 
-        // Here GIT_COMMIT comes from the first job and is a trigger for this job
+        // Here GIT_COMMIT var comes from the first job and is a trigger for this job
         stage("update configuration files") {
             steps {
                 script {
