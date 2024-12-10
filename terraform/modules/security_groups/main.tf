@@ -1,5 +1,5 @@
 locals {
-  inbound_ports = [80, 443, 5000]
+  inbound_ports = [80, 443]
 }
 
 resource "aws_security_group" "lb_sg" {

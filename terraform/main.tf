@@ -8,10 +8,10 @@ terraform {
 
   required_version = ">= 1.2.0"
 }
-
+# Need to add backend in s3
 provider "aws" {
   region = "eu-north-1"
-  profile = "eran"
+  # profile = "eran"
 }
 
 data "aws_eks_cluster_auth" "cluster_token" {
