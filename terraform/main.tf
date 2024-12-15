@@ -52,7 +52,7 @@ module "eks" {
 
 module "nginx_ingress" {
   source     = "./modules/ingress_controller"
-  depends_on = [module.eks]
+  depends_on = [module.prometheus]
 }
 
 module "argocd" {
@@ -62,6 +62,6 @@ module "argocd" {
 
 module "prometheus" {
   source = "./modules/prometheus"
-  depends_on = [module.nginx_ingress]
+  depends_on = [module.eks]
 }
       

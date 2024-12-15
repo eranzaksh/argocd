@@ -1,5 +1,5 @@
 resource "aws_iam_role" "nodes" {
-  name = "eks-nodes-argocd"
+  name = "eks-nodes-argocd-prometheus"
 
   assume_role_policy = jsonencode({
     Statement = [{

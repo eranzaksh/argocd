@@ -25,9 +25,8 @@ This repository contains the configuration and code for the Continuous Deploymen
   2. Updates the `image.tag` value in the Helm chart.
   3. Pushes changes to the repository, triggering ArgoCD to monitor and deploy the new version.
 
-### 4. **Grafana Monitoring**
-- **Directory**: `environment/grafana`
-- Includes Grafana setup for monitoring the EKS cluster and the web app.
+### 4. **Prometheus Monitoring**
+- Includes Grafana setup for visualization of the ingress controller connections in   the EKS cluster and the web app.
 
 ## Workflow
 1. **Build Pipeline**:
@@ -44,6 +43,8 @@ This repository contains the configuration and code for the Continuous Deploymen
    - Exposes the web application via an AWS Load Balancer.
 5. **ArgoCD UI**:
    - Accessible using the DuckDNS-hosted domain for deployment visibility.
+6. **Grafana Dashboard**:
+   - Accessible using the DuckDNS-hosted domain
 
 ## Accessing the ArgoCD Web UI
 - Hostname: Configured using **DuckDNS**.
@@ -78,20 +79,23 @@ This repository contains the configuration and code for the Continuous Deploymen
    ```
 3. Configure Jenkins with the provided `Jenkinsfile`.
 4. Deploy the application using ArgoCD.
+5. Monitor traffic via grafana:
+   ```bash
+   username: admin
+   password: prom-operator
+   import dashboard: 14314
+   ```
 
 ## Repository Structure
 ```plaintext
-environment/grafana/    # Grafana setup for monitoring
-terraform/              # Terraform configurations (VPC, EKS, ArgoCD, Ingress Controller)
+terraform/              # Terraform configurations (VPC, EKS, ArgoCD, Ingress Controller, Prometheus)
 weather-helm/           # Helm chart for the Weather Web-App
 Jenkinsfile             # Jenkins pipeline for CD
 README.md               # Project documentation
 ```
 
 ## Future Enhancements
-- Add argocd app creation in Jenkinsfile
-- Add Prometheus to monitor traffic going through the ingress
-
+- Add argocd app creation in Jenkinsfile for even more automation
 ---
 
 **Author**: Eran Zaksh  

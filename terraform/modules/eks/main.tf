@@ -1,5 +1,5 @@
 resource "aws_iam_role" "tf-eks" {
-  name = "eks-tf-argocd"
+  name = "eks-tf-argocd-prometheus"
 
   assume_role_policy = <<POLICY
 {
