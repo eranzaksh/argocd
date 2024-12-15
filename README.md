@@ -29,10 +29,6 @@ This repository contains the configuration and code for the Continuous Deploymen
 - **Directory**: `environment/grafana`
 - Includes Grafana setup for monitoring the EKS cluster and the web app.
 
-### 5. **GitHub Actions**
-- **Directory**: `.github/workflows`
-- Placeholder for any future GitHub Actions workflows.
-
 ## Workflow
 1. **Build Pipeline**:
    - Another CI pipeline builds the Docker image for the Weather Web-App.
@@ -84,7 +80,6 @@ This repository contains the configuration and code for the Continuous Deploymen
 
 ## Repository Structure
 ```plaintext
-.github/workflows/      # Placeholder for GitHub Actions
 environment/grafana/    # Grafana setup for monitoring
 terraform/              # Terraform configurations (VPC, EKS, ArgoCD, Ingress Controller)
 weather-helm/           # Helm chart for the Weather Web-App
