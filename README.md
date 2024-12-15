@@ -88,9 +88,8 @@ README.md               # Project documentation
 ```
 
 ## Future Enhancements
-- Add automated testing in the pipeline.
-- Implement GitHub Actions for CI/CD.
-- Enhance Grafana dashboards for better insights.
+- Add argocd app creation in Jenkinsfile
+- Add Prometheus to monitor traffic going through the ingress
 
 ---
 
