@@ -67,7 +67,7 @@ This repository contains the configuration and code for the Continuous Deploymen
 ## How to Use
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/eranzaksh/argocd.git
    ```
 2. Set up Terraform to provision infrastructure:
    ```bash
