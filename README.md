@@ -34,6 +34,7 @@ This repository contains the configuration and code for the Continuous Deploymen
    - Another CI pipeline builds the Docker image for the Weather Web-App.
    - It outputs a **build number** and **commit hash**.
 2. **Jenkins Pipeline**:
+   - Utilize dynamic agent using AWS.
    - Updates the Helm `image.tag` with the new build information.
    - Pushes the changes to the Helm chart values.
 3. **ArgoCD Monitoring**:
