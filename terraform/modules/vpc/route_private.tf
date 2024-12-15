@@ -14,7 +14,7 @@ resource "aws_route" "private_internet_access" {
 }
 
 resource "aws_route_table_association" "private_association" {
-  count = length(var.private_subnet_cidrs)
+  count          = length(var.private_subnet_cidrs)
   subnet_id      = aws_subnet.private_subnets[count.index].id
   route_table_id = aws_route_table.private_rt.id
 }

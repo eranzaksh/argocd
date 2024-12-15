@@ -32,7 +32,7 @@ provider "helm" {
   }
 }
 module "vpc" {
-  source = "./modules/vpc"
+  source               = "./modules/vpc"
   public_subnet_cidrs  = var.public_subnet_cidrs
   private_subnet_cidrs = var.private_subnet_cidrs
 }
@@ -51,12 +51,12 @@ module "eks" {
 }
 
 module "nginx_ingress" {
-  source = "./modules/ingress_controller"
-  depends_on = [ module.eks ]
+  source     = "./modules/ingress_controller"
+  depends_on = [module.eks]
 }
 
 module "argocd" {
-  source = "./modules/argocd"
-  depends_on = [ module.nginx_ingress ]
+  source     = "./modules/argocd"
+  depends_on = [module.nginx_ingress]
 }
       
