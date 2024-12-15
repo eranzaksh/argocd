@@ -59,4 +59,9 @@ module "argocd" {
   source     = "./modules/argocd"
   depends_on = [module.nginx_ingress]
 }
+
+module "prometheus" {
+  source = "./modules/prometheus"
+  depends_on = [module.nginx_ingress]
+}
       

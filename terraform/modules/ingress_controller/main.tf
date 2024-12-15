@@ -11,6 +11,12 @@ resource "helm_release" "nginx_ingress" {
     controller:
       service:
         type: LoadBalancer
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+          additionalLabels:
+            release: "my-k8s-prom-stack"
     EOF
   ]
 }
